@@ -5,7 +5,14 @@ const http = require('http');
 const fs = require('fs');
 
 
-const URL = 'http://www.msj1.com/archives/46.html';
+let URL = '';
+let argument = process.argv.splice(2);
+URL = argument[0];
+
+
+// 调用主函数
+downloadMovie(URL);
+
 
 
 function downloadMovie(movieUrl){
@@ -52,4 +59,3 @@ function appendContent(fileName, content) {
     });
 }
 
-downloadMovie(URL);
