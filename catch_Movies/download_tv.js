@@ -42,9 +42,13 @@ function downloadMovie(movieUrl){
                 let content = '';
                 $('#content table').first().find('a').each((index, value) => {
                     let href = value.attribs['href'];
+                    let regxpMagnet = /^(ed2k)/;
+                    if(regxpMagnet.test(href)){
                         content += href + '\n';
+                    }
                 });
-                appendContent('downloadList_tv.txt', content + '\n', );
+                // appendContent('downloadList_tv.txt', content + '\n', );
+                writeContent('downloadList_tv.txt', content);
             }
         });
     }).on('error', (e) => {
@@ -59,3 +63,8 @@ function appendContent(fileName, content) {
     });
 }
 
+function writeContent(fileName, content) {
+    fs.writeFile(fileName, content, (err) => {
+        if (err) throw err;
+    });
+}
