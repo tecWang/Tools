@@ -1,0 +1,14 @@
+{
+    "data": [
+        {
+            "name": "tecwang",
+            "imagePath": "../../../static/avator_wang.png",
+            "score": 0
+        },
+        {
+            "name": "惠茹",
+            "imagePath": "../../../static/avator_zhang.jpg",
+            "score": 0
+        }
+    ]
+}
