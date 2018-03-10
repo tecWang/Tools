@@ -28,7 +28,6 @@ export default {
       }
   },
   created(){
-      this.test();
       this.init();
   },
   methods: {
@@ -37,12 +36,18 @@ export default {
           this.score = this.detail.score;
           this.imagePath = this.detail.imagePath;
       },
-      test(){
-          console.log(this.detail.score);
-      },
       addTimes(){
           this.score++;
-      }
+          this.$emit('addCount', this.name);
+      } 
+  },
+    watch: {
+        score: function () {
+            if(this.score >= 3){
+                // console.log(this);
+                alert("it is time to paint pig on you " + this.name);
+            }
+        }
   },
   components: {
       'v-split': Split

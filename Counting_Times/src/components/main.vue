@@ -4,18 +4,34 @@
     <div class="persons">
       <div class="persons-box">
         <div v-for="person in persons" v-bind:key="person.name">
-          <v-person :detail="person"></v-person>
+          <v-person :detail="person" @add="writeLocal"></v-person>
         </div>
       </div>
     </div>
     <div class="back-tracking top-button">历史记录</div>
+    <v-timer class="timer-container"></v-timer>
   </div>
 </template>
 
+
+
 <script>
 import Person from "./person/person.vue"
-import Data from "../common/data/person.json"
+import Timer from "./timer/timer.vue"
 
+
+// 将json数据转换为本地长期数据
+import Data from "../common/data/person.json"
+let date = new Date();
+let curdate = date.getMonth() + '-' + date.getDate();
+let tardata = localStorage.getItem(curdate);
+if(localStorage.getItem(curdate)){
+  console.log('data already exists!');
+  tardata = JSON.parse(tardata);
+}else{
+  localStorage.setItem(`${date.getMonth()}-${date.getDate()}`, JSON.stringify(Data));
+  tardata = Data;
+}
 
 export default {
   name: 'Main',
@@ -25,18 +41,28 @@ export default {
       persons: {}
     }
   },
-  created(){
-    this.init();
+  mounted(){
+    setTimeout(() => {
+      this.init();
+    }, 100);
   },
   methods: {
     init(){
+      this.updateTime();
+      let timer = setInterval(this.updateTime, 1000);
+      this.persons = tardata.data;
+    },
+    writeLocal(name){
+      console.log(name);
+    },
+    updateTime(){
       let d = new Date();
-      this.date = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
-      this.persons = Data.data;
+      this.date = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}  ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`;
     }
   },
   components: {
-    "v-person": Person
+    "v-person": Person,
+    "v-timer": Timer
   }
 }
 </script>
@@ -50,12 +76,14 @@ export default {
     .date
       position absolute
       left 20px
-      top 20px
+      top 60px
+      font-size 80px
+      color pink
     .back-tracking
       position  absolute 
       top 20px
       right 20px
-      background-color skyblue
+      background-color pink
     .persons
       position absolute
       left 0
@@ -70,6 +98,12 @@ export default {
         display flex
         justify-content center
         align-items center
+    .timer-container
+      position absolute
+      bottom 40px
+      width 80%
+      left 50%
+      margin-left -40%
   .top-button
     box-sizing border-box
     height 40px

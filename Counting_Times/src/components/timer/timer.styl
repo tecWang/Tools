@@ -1,0 +1,24 @@
+.timer
+    border-radius 5px
+    border 3px solid pink
+    overflow hidden
+    position relative
+    .busy, .easy
+        height 40px
+        display inline-block
+        float left
+        line-height 40px
+    .busy 
+        width 80%
+        background-color gold
+    .easy   
+        width 20%
+        background-color orange
+    .mask
+        width 100%
+        background-color skyblue
+        position absolute
+        left -100%
+        top 0
+        height 40px
+        z-index 100
