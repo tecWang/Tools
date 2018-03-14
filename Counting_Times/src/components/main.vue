@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="back-tracking top-button">历史记录</div>
-    <v-timer class="timer-container"></v-timer>
+    <!-- <v-timer class="timer-container"></v-timer> -->
   </div>
 </template>
 
