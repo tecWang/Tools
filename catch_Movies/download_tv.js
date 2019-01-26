@@ -14,7 +14,6 @@ URL = argument[0];
 downloadMovie(URL);
 
 
-
 function downloadMovie(movieUrl){
     console.log('downloading ' + movieUrl);
     
